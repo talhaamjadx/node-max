@@ -1,18 +1,12 @@
 const express = require('express');
 
-const path = require("path")
-
-const rootDir = require('../utils/index');
-
 const router = express.Router();
 
-router.get('/add-name', (req, res, next) => {
-	res.sendFile(path.join(rootDir,'views','add-name.html'))
-})
+const { addNameController, namesController } = require('../controllers/nameControllers');
 
-router.post('/names', (req, res, next) => {
-	console.log("in here", req.body.name)
-	res.redirect('/')
-})
+router.get('/add-name', addNameController)
 
-module.exports = router;
+router.post('/names', namesController)
+
+exports.router = router
+

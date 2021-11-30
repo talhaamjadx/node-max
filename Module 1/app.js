@@ -4,7 +4,9 @@ const path = require("path");
 
 const app = express();
 
-const routes = require('./routes/index');
+const { router } = require('./routes/index');
+
+const { names } = require('./controllers/nameControllers');
 
 const bodyParser = require('body-parser')
 
@@ -13,11 +15,11 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res, next) => {
-	console.log(__dirname)
+	console.log({names})
 	res.sendFile(path.join(__dirname,'views','index.html'))
 })
 
-app.use(routes);
+app.use(router);
 
 app.use((req, res, next) => {
 	res.status(404).sendFile(path.join(__dirname, 'views','404.html'))
