@@ -1,4 +1,4 @@
-let names = []
+const namesClass = require('../models/names');
 
 const publicDir = require("../utils/index")
 
@@ -9,8 +9,7 @@ exports.addNameController = (req, res, next) => {
 }
 
 exports.namesController = (req, res, next) => {
-	names.push(req.body.name)
+	const newName = new namesClass(req.body.name)
+    newName.save();
 	res.redirect('/')
 }
-
-exports.names = names

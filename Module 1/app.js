@@ -6,7 +6,7 @@ const app = express();
 
 const { router } = require('./routes/index');
 
-const { names } = require('./controllers/nameControllers');
+const namesClass = require('./models/names');
 
 const bodyParser = require('body-parser')
 
@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res, next) => {
-	console.log({names})
+	console.log(namesClass.getAll())
 	res.sendFile(path.join(__dirname,'views','index.html'))
 })
 
